@@ -2,6 +2,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class main {
 
@@ -25,6 +26,17 @@ public class main {
         return utcDateTime.format(DateTimeFormatter.ISO_INSTANT);
     }
 
+    /**
+     * Calculates the number of days between two dates.
+     *
+     * @param startDate The start date - LocalDateTime object.
+     * @param endDate   The end date - LocalDateTime object.
+     * @return The number of days between the two dates
+     */
+    public static long getDaysBetweenDates(LocalDateTime startDate, LocalDateTime endDate) {
+        return ChronoUnit.DAYS.between(startDate, endDate);
+    }
+
     public static void main(String[] args) {
     
         LocalDateTime now = getCurrentDateTime();
@@ -33,6 +45,10 @@ public class main {
         String isoDate = convertToISO8601UTC(now);
         System.out.println("ISO 8061 UTC Time String: " + isoDate);
 
-    
+        LocalDateTime startDate = LocalDateTime.of(2024, 12, 1, 0, 0);
+        LocalDateTime endDate = LocalDateTime.of(2024, 12, 6, 0, 0);
+        long daysBetween = getDaysBetweenDates(startDate, endDate);
+        System.out.println("Days Between " + startDate + " and " + endDate + ": " + daysBetween);
     }
+
 }
